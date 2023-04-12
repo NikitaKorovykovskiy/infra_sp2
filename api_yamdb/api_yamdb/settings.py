@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'p&l%385148kslhtyn^##a1)ilz@4zqj=rq&agdol^##zgl9(vs'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,7 +42,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'api_yamdb.urls'
 
-TEMPLATES_DIR = BASE_DIR / 'templates'
+TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -65,14 +65,14 @@ WSGI_APPLICATION = 'api_yamdb.wsgi.application'
 # Database
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.getenv('DB_ENGINE', default=True),
-        'NAME': os.getenv('DB_NAME', default=True),
-        'USER': os.getenv('POSTGRES_USER', default=True),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', default=True),
-        'HOST': os.getenv('DB_HOST', default=True),
-        'PORT': os.getenv('DB_PORT', default=True)
-    }
+        'default': {
+            'ENGINE': os.getenv('DB_ENGINE', default='django.db.backends.postgresql'),
+            'NAME': os.getenv('DB_NAME', default='default'),
+            'USER': os.getenv('POSTGRES_USER', default='default'),
+            'PASSWORD': os.getenv('POSTGRES_PASSWORD', default='default'),
+            'HOST': os.getenv('DB_HOST', default='default'),
+            'PORT': os.getenv('DB_PORT', default='default')
+        }
 }
 
 
@@ -110,6 +110,7 @@ USE_TZ = True
 AUTH_USER_MODEL = 'users.User'
 
 # Static files (CSS, JavaScript, Images)
+
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
